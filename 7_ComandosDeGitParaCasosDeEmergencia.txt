@@ -1,0 +1,32 @@
+Comandos de Git para casos de emergencia
+	1. Reconstruir commit en Git con amend
+		-git commit --amend    -> Los cambios que realice ahora (ya guardados en memoria [add]) se añadirán 
+					  al commit anterior (como si fuece solo uno).
+
+		(Esto puede pasar si queremos hacer dos cambios, pero realizamos uno y hacemos un commit. Para el otro 
+		cambio que se nos olvido, deberíamos hacer otro commit, pero en vez de eso, agregamos el segundo cambio 
+		en memoria [add] y luego agregamos este cambio al commit anterior -> git commit --amend)
+
+
+	2. Git reset and reflog: usese en caso de emergencia
+		(Cuando dejamos la cagada)
+	
+		Comandos:
+			-git reflog			   -> Nos muestra el historial de absolutamente TODO!!!
+			-git reset --hard <hashDelCommit>  -> Volvemos a un commit anterior eliminando el historial 
+							      posterior
+
+
+	3. Buscar en archivos y commits de Git con grep y log
+		
+		-Para los archivos...
+		-git grep <palabra> -> Buscamos una palabra
+			-(-n)       -> Lineas en las que ocurre
+			-(-c)	    -> Veces que se repite   
+			-(-i)	    -> Ignora mayusculas y minusculas
+			-(-v)       -> Mustra las lineas que no contengan la palabra
+			-(-l) 	    -> Lista los archivos que contienen la palabra 
+
+		-Para los commits
+		-git log 
+			-(-S) <palabra> -> Buscar la palabra en un commit      

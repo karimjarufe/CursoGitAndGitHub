@@ -1,0 +1,88 @@
+1. ¿Que es Git?
+	La premisa es que, en vez de guardar muchos archivos con versiones diferentes, aquí existe 
+	solo un archivo que lo hace.
+		
+	Se usa en la maquina local (PC), que funciona en la terminal o linea de comandos.
+
+	A simples pasos, todo comienza creando un directorio, volverlo un repositorio de git, añadir los archivos y 
+	confirmar los cambios en el repositorio.
+
+2. ¿Por qué utilizar un sistema de versiones como Git?
+	Guardar diversas versiones en un archivo.
+	Solo guarda los cambios y no todo el archivo nuevamente.
+	Nos da información de quien lo cambio, cuando, que, etc.
+
+	Si tenemos el archivo.txt
+		Agregamos al sistema de control de versiones
+			$ git init                  -> Comienza, en tu carpeta, un repositorio de los cambios
+			$ git add archivo.txt       -> El sistema de control de versiones ahora sabe que existe el archivo
+			$ git commit -m "<mensaje>" -> Envia los ultimos cambios del archivo al sistema de control de versiones
+			(cada commit es una nueva version del archivo)
+
+		Al hacer un cambio, agregamos nuevamente el archivo                           
+			$ git add archivo.txt                          
+	
+			$ git commit -m "Cambios a archivo (v1)"
+			$ git status			         -> Estado de la base de datos
+			$ git show				 -> Mustra todos los cambios historicos hechos
+			$ git log archivo.txt                    -> Historial de cambios del archivo 
+
+3. Instalando Git y GitBash en Windows
+	Instalar Git
+		-git-scm.com
+		-Descargar
+		-En la instalación, debemos fijarnos que GitBash se instalará
+		-Colocamos "Git from the command line..."
+		-Colocamos "Use the OpenSSL library"
+		-Coloca la primera alternativa
+		-Coloca "Use MinTTY"
+		-Coloca las tres opciones
+		-Coloca todas las opciones
+		-Lounch
+
+	Se abrirá una consola (si no se habre, busca Git Bash) 
+
+4. Archivos de texto
+	Instalar "visual studio code"
+		-Siguiente, siguiente, siguiente
+		-Ejecutar
+
+5. Introducción a la terminal y linea de comandos
+	-/      		   -> home
+	-pwd    		   -> carpeta en la que me encuentro
+	-cd /   		   -> ir a home
+	-ls     		   -> listar documentos que hay en el directorio
+	-ls -al 		   -> listar documentos con detalle
+	-cd     		   -> carpeta principal
+	-mkdir <nombreDirectorio>  -> crear carpeta
+	-touch <nombreArchivo.txt> -> crear archivo vacio
+	-cat <nombreArchivo>       -> mustra contenido de archivo
+	-history                   -> historial de comandos (para reutilizar un comando es !<numero>)
+	-rm <nombreArchivo>        -> eliminar archivo 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

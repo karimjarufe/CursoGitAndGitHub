@@ -1,0 +1,67 @@
+(Repasar)
+Multiples entornos de trabajo en Git
+	1. Git Rebase: reorganizando el trabajo realizado 
+		-(No es buena practica)
+		-(Solo para repositorios locales)
+		-(Reescribe la historia del repositorio)
+		
+		-En la rama main
+		-Editamos un archivo (le hacemos add and commit)
+		
+		-Creamos una nueva rama
+		-Entramos a la rama
+		-Editamos el mismo archivo 
+
+		Ahora quiero pegar, en master, todo lo que se hizo en la rama creada, como si nunca existio esta 
+		bifurcación:
+			-Estando en la rama creada
+			-git rebase main (pega mi historia a la rama del main)
+
+			-Estando en la rama main
+			-git rebase <ramaCreada>
+
+			(Si queremos eliminar la rama -> git branch -D <rama>)
+	
+
+	2. Git Stash: guardar cambios en memoria y recuperarlos despues
+		-(Comando de un gran uso)
+
+		-Comandos:
+			git stash                      -> Agrega los cambios (de un archivo) que realice en memoria y lugar temporal, volviendo al commit anterior
+			git stash list		       -> Lista de los stash
+			git stash pop		       -> Abro el stash que habia creado anteriormente con los cambios
+			git stash branch <nombreRama>  -> Guardo mis cambios y los pongo en una rama (siempre y cuando ya tenga un stash)
+			git satash drop		       -> Si guardamos un stash erroneo, podemos eliminarlo y volver al commit anterior
+
+
+	3. Git Clean: limpiar tu proyecto de archivos no deseados
+		-git clean --dry-run -> Muestra que va a borrar
+		-git clean -f        -> lo borra
+
+		(hay cosas que hay que borrar manualmente)
+
+
+	4. Git cherry-pick: trae commits viejos al head de un branch
+		-(Es mala practica)
+		
+		-La gracia es tener una rama A, crear una rama B y hacer cambios allí. Tras hacer muchos commits, 
+		queremos llevar uno de esos cambios (commits) a la rama A.
+			
+	   		Sin CherryPick 
+				Rama A (master) : a - b - c - d
+						   	   \
+					  	    	    \
+				Rama B (feature):            e - f - g
+
+			Con CherryPick
+				Rama A (master) : a - b - c - d - f
+						   	   \
+					  	    	    \
+				Rama B (feature):            e - f - g
+
+		Comandos:
+			-git cherry-pick <hashDelCambio> -> este comando inserta un cambio de un commit especifico 
+							    a otra rama. Para hacer este comando, debemso estar en la 
+							    rama a la cual le queremos agregar el cambio. (El hash es 
+							    de la rama en la que estamos trabajando los cambios. Se 
+							    refiere a la Rama B del ejemplo).

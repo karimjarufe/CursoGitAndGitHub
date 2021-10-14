@@ -1,0 +1,23 @@
+Bonus sobre Git y Github
+	1. Comandos y recursos colaborativos en Giy y GitHub
+		-Documentación: https://git-scm.com/doc
+
+		git shortlog           -> Mustra todos los commits que se han creado (todas las personas)
+			-(-sn) 	       -> Numero de commits por persona
+			-(--all)       -> Todos los commits (incluidos los eliminados)
+			-(--no-merges) -> Los commits sin contar los merges
+
+		git config --global alias.<nombreAlias> "<comando>" -> Configuracion global para la maquina (PC)
+
+		git blame <archivo>    -> Muestra quien fue la ultima persona que modifico, linea por linea, el archivo
+
+		
+		En GitHug (dentro de un proyecto):
+			-"Insights" -> Información general del proyecto
+			
+
+	2. Tu futuro en Git y GitHub
+
+		
+
+		

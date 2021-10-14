@@ -1,0 +1,78 @@
+Flujo de trabajo basico en Git
+	-git branch -> muestra en que rama estamos y cuales existen
+	
+	1. Flujo de trabajo basico con un repositorio remoto
+		Servidor remoto
+			-Aquí esta el repositorio remoto
+			-Todos trabajamos para ese repositorio remoto
+
+		Para traer datos de un servidor remoto
+			-En vez de "git init", lo que hacemos es clonar -> git clone url
+			-(Trae una copia del master al directorio de trabajo y crea una base de datos de 
+			  todsos los cambios historicos en el repositorio local y deja staging listo 
+			  para usar)
+
+		Como cambia esto mi flujo de trabajo
+			-Sigo haciendo add y commit (todo sigue igual hasta aquí)
+			-Cuando tengo todos los commits listos y quiero enviar todas las actualisaciones 
+			 a donde todo el mundo trabaja, hago un -> git push (si hay conflictos tengo que 
+			 lidear con eso).
+			
+			-Cuando quiero traer una actualización del repositorio remoto a mi repositorio 
+			 local (ya que gente cambio cosas en los archivos), hago un -> git fetch. Esto 
+			 lo copia en mi repositorio local, pero no me lo copia en mis archivos. Para que 
+			 me lo copie en mis archivos, tengo que fucionar la ultima version que esta en 
+			 el repositorio local con mi version actual -> git merge. 
+			-Existe un comando que hace estas dos acciones al mismo tiempo -> git pull.
+
+
+	2. Introduccion a las Branches (ramas) de git
+		master  		v1	vActual			(fucionamos nustros cambios con el master)
+						   |					  °
+						   °					  |
+		cabecera			vActual ---------° vActual2 ---------° vActual3
+		(nueva rama)
+
+		Ejemplo:
+			-Creamos nuestra rama -> git branch <nombreDeRama>
+			-(tenemos que ver si el HEAD le apunta al master y a la rama 
+			  que creamos -> git show. Esto quiere decir que el ultimo commit 
+			  esta pegado a dos ramas distintas)
+
+			-Para acceder a la rama creada -> git checkout <nombreDeRama>
+
+			-Agregamos una cabecera en el archivo blog.html
+			-(Le hacemos un add y un commit)
+			-(git show para ver los ultimos cambios y en que HEAD estoy trabajando)
+			-(git log para ver historial de commits. Nos podemos en que HEAD trabajamos 
+			  y desde cuando)
+
+			-(Podemos devolvernos a HEAD master y veremos que nada se a cambiado ahí)
+
+
+	3. Fusión de ramas con Git merge
+		Ejemplo:
+			-Hacemos un cambio a la cabecera en el archivo blog y un cambio al archivo estilos
+			-(Si hago un checkout al master sin guardar los cambios lo pierdo todo)
+
+			-Volvemos al HOME master y modificamos el post del blog (y lo que queramos)
+			-Volvemos al HOME cabecera
+
+			-Ahora vamos a hacer un MERGE
+				-Debemos ir a la rama principal (master)
+				-git merge <nombreDeRama> -> para traer y juntar lo que hicimos en la 
+				 rama cabecera
+				-(Esto hace un nuevo commit fucionando el proyecto de una rama con 
+				 el proyecto master en la rama master)
+				-(git log -> nos trae el ultimo commit de la rama, luego el ultimo commit 
+				 de master y, despues, el commit final, que seria la fucion)
+
+
+	4. Resolucion de conflictos al hacer un merge
+		-Si estoy en una rama diferente a master, y quiero que mi version sea igual a la que 
+		 ahora es master, escribo desde la rama -> git checkout master
+				
+				
+
+
+				
