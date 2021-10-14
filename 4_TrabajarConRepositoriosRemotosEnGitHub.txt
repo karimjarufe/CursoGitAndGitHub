@@ -1,0 +1,154 @@
+Trabajar con repositorios remotos en GitHub
+	
+	1. Cambios en GitHub: de MASTER a MAIN
+		-GitHub a cambiado el nombre de su rama principal. Ya no es master, 
+		sino que main. 
+
+	
+	2. Uso de GitHub
+		-New respository
+			-Nombre: Blog
+			-Descripcion: <...>
+			-Public
+			-README
+			-Crearte
+
+		-Subir un proyecto
+			-Clone or download
+			-HTTPS
+			-Copiar url
+			-Ir a la rama master en la consola
+			-(Ahora le decimos a Git que crearemos un origen remoto de nuestros archivos)
+				git remote add origin <direccionQueCopiamos>
+			
+			-Para ver cual es el repositorio remoto
+				git remote
+			-Tambien podemos ver links para hacer fetch y push
+				git remote -v
+
+			-git push origin master:main -> Que Git envíe al origen la rama master
+			-(Guardar credenciales)
+			-Puede que de un error ya que puede que no tengas archivos del contenedor 
+			 remoto en tu carpeta local. Para solucionar esto, traemos todos los cambios 
+			 del origen: git pull origin main
+			-Puede que de un error y se reuse a hacer el merge ya que no hay un historial
+			 parecido. Para solucionar esto debemos forsarlo:
+				git pull origin main --allow-unrelated-histories
+
+			-Ahora podemos enviar todo lo que tenemos en local al origen (repositorio remoto)
+				git push origin master	
+				git push origin master:main
+				
+
+			!!!Resumen rapido de como hacer pull y push (carpeta vacía)
+				-git remote add origin <codigoRepositorioGitHub>
+				-git pull origin main
+				-(modificamos o agregamos archivos)
+				-git push origin master:main
+				
+				*Caso extraño
+				-(si modificamos nuestros archivos locales haciendoles commit y luego
+				les hacemos un push al origen, pero este no se realiza por que alguien a 
+				agregado archivos nuevos en el origen, tendremos que traer los cambios 
+				y luego enviar la información que teniamos ya guardada)
+				-git pull origin main
+				-git push origin master:main
+
+
+	3. Como funcionan las llaves publicas y privadas
+		La persona que quiere resivir el mensaje crea una llave PUBLICA y una PRIVADA.
+		Este le manda la llave PUBLICA a la persona que creara y te enviara el mensaje.
+		La persona que te enviara el mensaje cifra este texto con la llave PUBLICA y te lo envia.
+		Yo lo recibo y lo desbloqueo con la llave PRIVADA.
+
+
+	4. Configurar tus llaves SSH en local
+		En el entorno local creamos una llave rpivada y llave publica
+		La llave publica se la enviamos a github
+		Ahora nos conectamos con protocolo SSH (no HTMLS) -> llaves por persona
+		Github te envia una llave publica y se conecta
+		(a la llave privada se le puede poner contraseña)
+
+		Practica:
+			Abrimos GitBash
+			Vamos a la carpeta home (~)
+			Vamos al perfil de GitHub
+			Copiamos el email
+			Vemos la configuracion de git (git config -l)
+			Cambiamos email (git config --global user.email "<emailCopiado>")
+	
+			Crear llave SSH (ssh-keygen -t rsa -b 4096 -C "<emailCopiado>")
+			Enter
+			Pasword (sin contraseña apreta dos veces enter)
+			
+			Tenemos que ver si el servidor ssh esta activado
+			eval $(ssh-agent -s) -> saldra "Agent pid (numero)"
+			
+			Las llaves estan en la carpeta home (.ssh -> ahi estan las dos llaves)
+			
+			Agregamos la llave PRIVADA al servidor 
+				ssh-add ~/.ssh/id_rsa
+				
+
+	5. Conexion a GitHub con SSH
+		-Abrimos el archivo de la llave PUBLICA y copiamos su contenido
+		-Vamos al perfil GitHub -> Settings -> SSH -> Nueva
+		-Ponemos el titulo y pegamos la llave
+		-Vamos a mis repositorios -> <proyecto> -> Clone or Downloads -> Use SSH -> Copiamos URL
+		-Vamos a el Bash y entramos a nuestro proyecto
+		-Cambiamos la URL -> git remote set-url origin <pegarLaURL>
+		-(Podemos verificarla si precionamos -> gir remote -v)
+
+		Veamos si funciona:
+			-Cambiamos algo en nuestros archivos locales
+			-Traemos la ultima version del servidor (siempre hay que hacerlo antes de hacer 
+			un commit). -> git pull
+			-Colocamos -> yes
+			-git pull origin main
+			-git add .
+			-git commit -m "<mensaje>"
+			-git pull origin main (solo para actuializar a ultima version)
+			-git push origin master:main
+
+
+	6. Tags y versiones en Git y GitHub (y alias)
+		-git tag -> ver los tags (versiones) existentes
+		-git show-ref --tags 				       -> Nos muestra los tag y a donde estan asignados
+		-git log --all --graph --decorate --oneline 	       -> Todos los cambios estructurados
+		-git tag -a <version> -m "<mensaje>" <codigoDelCambio> -> Creamos un tag (una version)
+		-git push origin --tags 			       -> Enviamos los tags a GitHub
+		-git tag -d <nombreTag> 			       -> Eliminar tag de Git
+		-git push origin :refs/tags/<nombreTag> 	       -> Eliminar tag de GitHub
+		
+		
+		-(Alias: alias <nombreElegido>="<comando>")
+
+			
+	7. Manejo de ramas en GitHub
+		En GitHub siempre veremos la rama master, pero no las de más que creamos.
+
+		Recordar comandos
+			-git checkout <nomRama>      -> cambiamos de rama
+			-git branch                  -> todas las ramas locales que existen 
+			-git branch -r               -> todas las ramas remotas que existen 
+			-git branch -a               -> todas las ramas que existen
+			-git show-branch             -> ramas que existen y cual es su historia
+			-git show-branch --all       -> ramas que existen con algo mas de datos y su historia mas reciente
+			-git pull origin main -> (esto lo hacemos (en main) por buena practica antes de enviar cualquier cosa)
+			-git push orgin <nomRama>    -> enviamos la rama hacia GitHub
+
+
+	8. Configurar multiples colaboradores en un repositorio de GitHub
+		La persona que será agregada
+			-Esta persona no hará un git init en su carpeta, ya que esta persona quiere traer 
+			un repositorio que ya esta en GitHub para trabajar con el y enviar colaboraciones.
+			-Visita la pagina web del proyecto remoto
+			-En el caso de HTTPS -> git clone <linkHTTPS>
+			-Podemos entrar a la carpeta del proyecto que se a creado y verificar los archivos
+			-(Tenemos que esperar a ser agregados al proyecto y luego aseptar la invitación)
+			-(Luego de aseptar la invitación, puedo hacer colaboraciones al proyecto)
+
+		En el caso del dueño del proyecto
+			-Hay que agregar a la persona que quiere colaborar con el proyecto
+			-Vamos a los settings del proyecto -> Collaborators -> <AgregamosSuMailOrNombreCuenta>
+

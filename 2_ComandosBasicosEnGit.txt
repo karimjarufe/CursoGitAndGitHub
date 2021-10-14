@@ -1,0 +1,108 @@
+1. Crea un repositorio en Git y haz tu primer commit
+	
+	Configuración de usuario de Git
+		-git config 	   			   -> Nos muestra como se usa
+		-git config --list 			   -> Lista de configuraciones por defecto
+		-git config --global user.name "<Nombre>"  -> cambiamos el nombre
+		-git config --global user.email "<Correo>" -> cambiamos el correo
+		
+
+	Ejemplo:
+		-Creamos una carpeta para el proyecto (en la carpeta principal (~))
+		-Luego, inicializamos git en la carpeta (git init)
+		
+		-Creamos un archivo y lo poblamos (Podemos aberir visualcode -> code)
+		-(Podemos ver el estado con -> git status)
+
+		-Agregamos el archivo -> git add <nombreArchivo>
+		-(Podemos remover el archivo -> git rm <nombreArchivo> o git rm --cached <nombreArchivo>)
+
+		-Lo mandamos al repositorio -> git commit -m "<mensaje>"
+		-(Antes de esto debemos configurar quienes somos sonostros)
+
+		Modificando el archivo para una nueva version
+			-code <nombreArchivo> -> abrimos el archivo con un editor
+			-Editamos el archivo y lo guardamos
+			-(Verificamos el estado -> git status)
+
+			-Agregamos el archivo -> git add . o git add <nombreArchivo>
+			-Enviamos los cambios al sistema de control de versiones -> git commit -m "mensaje"
+			-(Verificamos el estado -> git status)
+			-(Podemos ver informacion del archivo con -> git log <nombreArchivo>)
+		
+	
+2. Analizar cambios en los archivos de tu proyecto con Git
+	-git show <nombreArchivo> 		      -> ver cambios que se han realizado en un archivo (compara version anterior con version nueva)
+	
+	-git log <nombreArchivo>  		      -> ver historial de los cambios
+
+	-git log --stat				      -> ver historial de cambios con detalles
+
+	-git diff <codigoDeArchivo> <codigoDeArchivo> -> que cambió del segundo archivo colocado con respecto al primero
+	 (con "git diff" puedo ver las diferencias de un archivo si, este archivo, esta en memoria (verde) y a sido modificado sin enviarlo a memoria (git add...) (rojo))
+
+
+3. Ciclo basico de trabajo en Git. Que es el stagin y los repositorios. 
+	DirectorioDelProyecto		Staging		Repoditory (nombre por defecto -> master)
+		Archivo.txt	
+
+	Al entrar al directorio del proyecto desde Git y colocar -> git init, esto creará el espacio Stagin 
+	(area guardada en memoria ram de los cambios) y Repository.
+	Agregamos archivos (git add <nombreArchivo>) a el area Staging, donde espera que lo envies al Repository  
+	donde viven todos los cambios (git commit -m "<mensaje>").
+	Al hacer esto, en el repository, a cada commit, se le agrega un codigo largo (git log <nomArch>).
+	
+
+4. Que es un Branch (rama) y como funciona un Merge en Git
+	Master		v1	v2	v3			vActual		vActual-----° vActualCombinada		
+								   |		   °		°
+								   |               |		|
+(rama)	Experimentos			v3	v3.1...  vf ------ | ------------- | ------------
+ 	(development)					           |		   |
+								   °		   |
+(rama)	Bugfixing						vActual	------°	vActual2
+	(hotfix)
+
+
+		*Si existe un bug en la version actual, podemos crear una rama nueva para repararlo y 
+		 luego lo probamos con la version actual. (esto se llama mersh) 
+
+		*Ya cuando tengo listo mis experimentos, quiero unirlos a la version actual, entonces 
+		 fucionamos la version final del experimento con la version actual. (esto se llama mersh) 
+		 
+
+5. Volver en el tiempo en nuestro repositorio utilizando reset checkout
+	Primero, debemos saver cuales son los commit que se han realizado (git log)
+	
+	Regresar a una version anterior
+		-git reset --hard <codigoDelCommit>  		   -> Todo vuelve al estado que indicamos (elimina todos los commits posteriores)
+		-git reset --soft <codigoDelCommit>  		   -> Volvemos al estado anterior, listo para el proximo commit 
+		-git reset <nombreDelArchivoOpcional> HEAD         -> Saca todos los archivos del area de staging
+		
+		-git checkout <codigoDelCommit> <nombreDelArchivo> -> Regresa el archivo a la version que indiquemos
+		-git checkout master <nombreDelArchivo>		   -> Regresamos el archivo a su version "master" (mas reciente)
+
+	Carpetas con archivos
+		Todo el proseso se realiza de la misma manera que todo lo de más.
+
+6. Git reset vs. Git rm (and HEAD)
+	Git rm
+		Elimina archivos de Git sin eliminar su historiol. Esto quiere decir que si volvemos en el 
+		tiempo a una version en la que exista el archivo, este se restaurara.
+
+		Lo usaremos con los siguientes flags:
+			git rm --cached -> elimina los archivos del repositorio local y del area de stagin, 
+					   pero los amntiene en el disco duro. Le dice a Git que deje de trackear
+					   el historial de cambios de estos archivos, donde pasaran a un 
+					   estado untracked.
+
+			git rm --force  -> elimina los archivos de Git y del disco duro. Podríamos acceder 
+					   a estos archivos nuevamente, pero con comandos avanzados.
+
+	Git reser
+		Nos deja volver al pasado sin posibilidades de regresar al futuro.
+		(!!!Este comando se utiliza solo en caso de EMERGENCIA)
+
+		
+		Git HEAD
+			Sacamos archivos del area de staging para que no se envien por commit.

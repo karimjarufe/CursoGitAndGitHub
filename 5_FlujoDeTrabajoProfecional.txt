@@ -1,0 +1,94 @@
+Flujo de trabajo profecional
+	1. Haciendo merge de ramas de desarrollo a master
+		-Los usuarios deben trabajar por ramas (EJ: rFooter, rHeader, rTitle, etc)
+		-Al hacer cambios y terminarlos (en sus ramas respectivas), se debe hacer un 
+		push a origin de la rama en la que estas trabajando, ya que el jefe o dueño 
+		del proyecto se encarga de unirlas.
+			
+
+	2. Flujo de trabajo profecional con pull requests
+		-(esquema)
+
+
+	3. Utilizando pull request en GitHub
+		-(ver video)
+
+
+	4. Creando un Fork, contribuyendo a un repositorio
+		Este es un cason en que el proyecto es open source y gente externa quiere colaborar
+		(la gente puede clonar el proyecto pero no hacer merge [push]):
+			-Desde la perspectiva del que quiere colaborar:
+				-Hacemos un Fork (precionamos en Fork para clonar el proyecto en GitHub)
+				-Lo clonamos con HTTPS o SSH a nuestro repositorio local
+
+				-Entramos a la carpeta del proyecto
+				-Hago los cambios que se requieran y los guardo
+				-git push (lo mandamos a nuestro repositorio en GitHub)
+				
+				-Vamos a GitHub, colocamos "New pull request" y luego "Create pull request"
+				-Luego, esperamos que acepten los cambios
+
+			-Desde el dueño del proyecto:
+				-"Pull request" -> Seleccionamos el pull request que queremos ver
+				-"Review changes" -> "Approve" or "Request changes"
+				-"Submite review"
+				-"Merge pull request" (para realixzar el merge)
+			
+			-Si el colaborador quiere seguir colaborando (siendo que el proyecto avanza):
+				-Vamos a GitHub, al proyecto clonado, y nos saldra un aviso en donde el proyecto 
+				original tienen mas commits que el nuestro. Precionamos en "Compare" -> "Switching 
+				the base"	
+				
+				-Vamos a nuestra consola
+				-(Requerimos una rama nueva para traernos las actualizaciones del proyecto original)
+				-Vamos al proyecto original en GitHub -> copio el link HTTPS -> git remote add 
+				upstream <URL>
+				-Verificamos las ramas -> git remote -v
+				-Traer todos los cambios del proyecto original -> git pull upstream main
+				-Ahora lo enviamos a nuestro repositorio (push)
+
+
+	5. Haciendo deployment a un servidor
+		-(Ver video. Sirve para los DevOps)
+
+	
+	6. ACTIVIDAD -> Hacer un pull request a un proyecto ageno
+		-(Realizada)
+
+
+	7. Ignorar archivos en el repositorio con .gitignore
+		-Vamos a la raiz de nuestro proyecto (carpeta principal del proyecto)
+		-Creamos una carpeta llamada ".gitignore" (Esta es uan lista de los archivos que se ignorarán)
+		-Por ejemplo, si tenemos .jpg en nuestra carpeta y no queremos que se envien o se guarden en memoria, 
+		colocaremos, dentro del archivo, *.jpg (o el nombre)
+		-Luego, agregamos y hacemos un commit
+
+
+	8. Readme.md es una excelente practica
+		-Nos sirve para dar las primeras impreciones para nuestro proyecto (a otras personas)
+		-Existe un editor en internet de README.MD
+
+
+	9. Tu sitio web publico con GitHug Pages
+		-GitHub tiene un serviucio de hosting gratis.
+		-Lo crearemos:
+			-pages.github.com
+			-Seguir los pasos (de la web)
+				-Crear un repositorio (debe ser publico)
+				-Copiamos el SSH y nos vamos a la terminal
+				-Vamos al Home
+				-git clone <SSH>
+				-Entramos a la nueva carpeta llamada como el repositorio
+				-Creamos un archivo index.html (lo guardamos)
+				-Hacemos un Push
+				-https://username.github.io
+
+				-Para ver nuestra pagina en la url anterior, vamos al repositorio en GitHub y apretamos 
+				"Settings"
+				-"Options" -> GitHub Pages -> Source -> master branch
+				-Nos mostrara la url nueva
+
+				-Para que la direccion tenga otro nombre, cambiamos en Settings -> Options -> 
+				Repository name -> "<nombreCuenta>.github.io" -> "Rename"
+
+				(!!!para repositorios ya creados, editar las opciones en "Settings")
